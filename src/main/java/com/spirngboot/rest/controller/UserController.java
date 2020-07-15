@@ -29,4 +29,10 @@ public class UserController {
 		return userService.getUserByName(userName);
 	}
 	
+	@GetMapping(value = "/alluser/{userName}/{address}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<User> getUserByNameAndAddress(@PathVariable String userName, @PathVariable String address) {
+		return userService.getUserByNameAndAddress(userName, address);
+	}
+	
 }
+
