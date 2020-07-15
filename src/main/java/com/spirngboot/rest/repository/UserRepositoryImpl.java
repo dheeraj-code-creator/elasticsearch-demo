@@ -27,7 +27,7 @@ public class UserRepositoryImpl implements UserRepository {
 	private ObjectMapper objectMapper;
 
 	RestHighLevelClient client = new RestHighLevelClient(
-			  RestClient.builder(new HttpHost("localhost", 9200, "http")));
+			  RestClient.builder(new HttpHost("10.157.152.1", 9200, "http")));
 
 	public List<User> findAllUserDetailsFromElastic() {
 		SearchRequest searchRequest = new SearchRequest();
@@ -57,7 +57,34 @@ public class UserRepositoryImpl implements UserRepository {
 		SearchRequest searchRequest = new SearchRequest();
 		searchRequest.indices("usermanage");
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+		// termQuery is case sensitive i.e ABC !=abc
 		searchSourceBuilder.query(QueryBuilders.boolQuery().must(QueryBuilders.termQuery("userName", userName)));
+		searchRequest.source(searchSourceBuilder);
+		List<User> userList = new ArrayList<User>();
+		try {
+			SearchResponse searchResponse = null;
+			searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+			if (searchResponse.getHits().getTotalHits().value > 0) {
+				SearchHit[] searchHit = searchResponse.getHits().getHits();
+				for(SearchHit hit: searchHit) {
+					Map<String, Object> map = hit.getSourceAsMap();
+					userList.add(objectMapper.convertValue(map, User.class));
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return userList;
+	}
+
+	@Override
+	public List<User> findByNameAndAddress(String userName, String address) {
+		SearchRequest searchRequest = new SearchRequest();
+		searchRequest.indices("usermanage");
+		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+		// matchQuery is case insensitive i.e ABC = abc
+		searchSourceBuilder.query(QueryBuilders.boolQuery().must(QueryBuilders.matchQuery("userName", userName))
+				                                           .must(QueryBuilders.matchQuery("address", address)));
 		searchRequest.source(searchSourceBuilder);
 		List<User> userList = new ArrayList<User>();
 		try {
