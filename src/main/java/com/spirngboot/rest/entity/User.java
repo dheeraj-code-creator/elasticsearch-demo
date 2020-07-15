@@ -4,15 +4,25 @@ public class User {
 
 	private String userId;
 	private String userName;
+	private String address;
 
 	public User() {
 		super();
 	}
 
-	public User(String userId, String userName) {
+	public User(String userId, String userName, String address) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
+		this.address = address;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public String getUserId() {
@@ -31,3 +41,4 @@ public class User {
 		this.userName = userName;
 	}
 }
+
