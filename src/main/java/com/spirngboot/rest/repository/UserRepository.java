@@ -12,4 +12,7 @@ public interface UserRepository {
 	List<User> findAllUserDetailsFromElastic();
 
 	List<User> findUserDetailByName(String userName);
+
+	List<User> findByNameAndAddress(String userName, String address);
 }
+
