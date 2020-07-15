@@ -21,4 +21,9 @@ public class UserService {
 	public List<User> getUserByName(String userName) {
 		return userRepository.findUserDetailByName(userName);
 	}
+
+	public List<User> getUserByNameAndAddress(String userName, String address) {
+		return userRepository.findByNameAndAddress(userName, address);
+	}
 }
+
