@@ -15,24 +15,23 @@ import com.spirngboot.rest.service.UserService;
 @RestController
 @RequestMapping(value = "/userinfo")
 public class UserController {
-
+	
 	@Autowired
 	private UserService userService;
 
-	@GetMapping(value = "/alluser", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<User> getAllUsers() {
-		return userService.getAllUsersInfo();
+	@GetMapping(value ="/alluser", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<User> getAllUser(){
+		return userService.getAllUserInfo();
 	}
 	
-	@GetMapping(value = "/alluser/{userName}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<User> getUserByName(@PathVariable String userName) {
-		return userService.getUserByName(userName);
+	@GetMapping(value ="/alluser/{userName}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<User> getUserByName(@PathVariable String userName){
+		return userService.getUserDataByName(userName);
 	}
 	
-	@GetMapping(value = "/alluser/{userName}/{address}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<User> getUserByNameAndAddress(@PathVariable String userName, @PathVariable String address) {
-		return userService.getUserByNameAndAddress(userName, address);
+	@GetMapping(value ="/alluser/{userName}/{address}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<User> getUserByNameAndAddress(@PathVariable String userName, @PathVariable String address){
+		return userService.getUserDataByNameAndAddress(userName, address);
 	}
 	
 }
-

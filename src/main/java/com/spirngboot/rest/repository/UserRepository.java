@@ -11,8 +11,9 @@ public interface UserRepository {
 
 	List<User> findAllUserDetailsFromElastic();
 
-	List<User> findUserDetailByName(String userName);
+	List<User> findAllUserDataByNameFromElastic(String userName);
 
-	List<User> findByNameAndAddress(String userName, String address);
+	List<User> findAllUserDataByNameAndAddressFromElstic(String userName, String address);
+
+	
 }
-

@@ -13,17 +13,19 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
-
-	public List<User> getAllUsersInfo() {
+	
+	public List<User> getAllUserInfo() {
+		
 		return userRepository.findAllUserDetailsFromElastic();
 	}
 
-	public List<User> getUserByName(String userName) {
-		return userRepository.findUserDetailByName(userName);
+	public List<User> getUserDataByName(String userName) {
+		return userRepository.findAllUserDataByNameFromElastic(userName);
 	}
 
-	public List<User> getUserByNameAndAddress(String userName, String address) {
-		return userRepository.findByNameAndAddress(userName, address);
+	public List<User> getUserDataByNameAndAddress(String userName, String address) {
+		return userRepository.findAllUserDataByNameAndAddressFromElstic(userName,address);
 	}
+
+
 }
-

@@ -14,7 +14,8 @@ public class User {
 		super();
 		this.userId = userId;
 		this.userName = userName;
-		this.address = address;
+		this.address= address;
+		
 	}
 
 	public String getAddress() {
@@ -41,4 +42,3 @@ public class User {
 		this.userName = userName;
 	}
 }
-
